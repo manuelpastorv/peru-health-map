@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🇵🇪 Mapa de Salud — Perú</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header id="topbar">
+    <h1>🇵🇪 Mapa de Establecimientos de Salud — Perú</h1>
+    <span class="subtitle">Datos: SUSALUD RENIPRESS · Datos Abiertos</span>
+  </header>
+  <div id="app">
+    <aside id="sidebar">
+      <button id="sidebar-toggle" aria-label="Toggle sidebar">☰ Filtros</button>
+      <div id="sidebar-content">
+        <div class="filter-group">
+          <label for="dept-filter">📍 Departamento</label>
+          <select id="dept-filter">
+            <option value="Todos">Todos los departamentos</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>🏥 Tipo de Establecimiento</label>
+          <label class="checkbox-label">
+            <input type="checkbox" class="type-filter" value="Hospital" checked/>
+            <span class="dot hospital"></span> Hospital
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" class="type-filter" value="Centro de Salud" checked/>
+            <span class="dot centro"></span> Centro de Salud
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" class="type-filter" value="Puesto de Salud" checked/>
+            <span class="dot puesto"></span> Puesto de Salud
+          </label>
+        </div>
+        <div id="stats-panel">
+          <h3>📊 Estadísticas</h3>
+          <div class="stat-row"><span>Total visible:</span><strong id="total-count">0</strong></div>
+          <div class="stat-row"><span><span class="dot hospital"></span> Hospitales:</span><strong id="hosp-count">0</strong></div>
+          <div class="stat-row"><span><span class="dot centro"></span> Centros:</span><strong id="centro-count">0</strong></div>
+          <div class="stat-row"><span><span class="dot puesto"></span> Puestos:</span><strong id="puesto-count">0</strong></div>
+        </div>
+        <div id="legend">
+          <h3>🗺️ Leyenda</h3>
+          <div class="legend-item"><span class="dot hospital"></span> Hospital</div>
+          <div class="legend-item"><span class="dot centro"></span> Centro de Salud</div>
+          <div class="legend-item"><span class="dot puesto"></span> Puesto de Salud</div>
+        </div>
+        <a href="https://www.datosabiertos.gob.pe/dataset/registro-nacional-de-entidades-prestadoras-de-servicios-de-salud-renipress"
+           target="_blank" rel="noopener noreferrer" class="data-link">
+          📂 Ver fuente de datos oficiales
+        </a>
+        <div class="learn-note">
+          💡 <strong>¿Adaptar para otro país?</strong><br/>
+          Solo reemplaza <code>data/ipress_sample.json</code>. Ver README.
+        </div>
+      </div>
+    </aside>
+    <div id="map"></div>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
