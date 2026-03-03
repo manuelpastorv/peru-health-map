@@ -1,0 +1,349 @@
+/* ============================================================
+   STYLE.CSS — Peru Health Map
+   ============================================================
+   This file controls how the page looks.
+   CSS (Cascading Style Sheets) is the language browsers use
+   to style HTML elements (colors, fonts, layout, sizes, etc.)
+   ============================================================ */
+
+/* --- RESET & BASE --- */
+/* Remove default browser margins and make everything use
+   the same box-sizing model (easier to calculate sizes) */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set the base font and prevent scrollbars on the whole page */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  color: #2d3748;
+  overflow: hidden; /* No scrollbars — map fills the screen */
+  height: 100vh;    /* vh = viewport height (full screen) */
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- TOP HEADER BAR --- */
+#top-bar {
+  background: #1a365d;  /* Deep navy blue */
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;       /* Don't shrink when the map is below */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+#top-bar h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+#top-bar .subtitle {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  display: none; /* Hidden on mobile, shown on bigger screens */
+}
+
+@media (min-width: 600px) {
+  #top-bar h1 { font-size: 1.1rem; }
+  #top-bar .subtitle { display: block; }
+}
+
+/* --- MAIN APP LAYOUT --- */
+/* The app area fills the remaining height below the header */
+#app {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- SIDEBAR --- */
+#sidebar {
+  width: 270px;
+  min-width: 270px;
+  background: #ffffff;
+  padding: 16px;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* On mobile, sidebar floats over the map */
+@media (max-width: 768px) {
+  #sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-100%); /* Hidden off-screen by default */
+  }
+
+  #sidebar.open {
+    transform: translateX(0); /* Slide in when .open class is added */
+  }
+}
+
+#sidebar h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a365d;
+}
+
+/* --- FILTER GROUPS --- */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-group > label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Dropdown select (department filter) */
+#dept-filter {
+  padding: 7px 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #2d3748;
+  background: #f7fafc;
+  cursor: pointer;
+  width: 100%;
+}
+
+#dept-filter:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 2px rgba(49,130,206,0.2);
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.checkbox-group label:hover {
+  background: #ebf4ff;
+}
+
+.checkbox-group input[type="checkbox"] {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  accent-color: #3182ce;
+}
+
+/* --- COLORED DOT indicators (legend & stats) --- */
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-red    { background: #e53e3e; }
+.dot-orange { background: #dd6b20; }
+.dot-green  { background: #38a169; }
+
+/* --- STATS PANEL --- */
+#stats {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+#stats h3, #legend h3 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+#stats p, #legend p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+  font-size: 0.88rem;
+}
+
+#stats strong {
+  margin-left: auto;
+  font-size: 1rem;
+  color: #1a365d;
+}
+
+#stats hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 8px 0;
+}
+
+/* --- LEGEND --- */
+#legend {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* --- DATA SOURCE LINK --- */
+.data-link {
+  display: block;
+  text-align: center;
+  padding: 8px;
+  background: #ebf8ff;
+  border: 1px solid #bee3f8;
+  border-radius: 6px;
+  color: #2b6cb0;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.15s;
+  margin-top: auto;
+}
+
+.data-link:hover {
+  background: #bee3f8;
+}
+
+/* --- SIDEBAR TOGGLE BUTTON (mobile ✕) --- */
+#sidebar-toggle {
+  display: none; /* Hidden on desktop */
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #4a5568;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+#sidebar-toggle:hover {
+  background: #edf2f7;
+}
+
+@media (max-width: 768px) {
+  #sidebar-toggle { display: block; }
+}
+
+/* --- MOBILE OPEN BUTTON (☰ Filtros) --- */
+#open-sidebar-btn {
+  display: none; /* Hidden on desktop */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  padding: 10px 24px;
+  background: #1a365d;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+  #open-sidebar-btn { display: block; }
+}
+
+/* --- MAP CONTAINER --- */
+/* The map fills all remaining space next to the sidebar */
+#map {
+  flex: 1;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Make Leaflet popups look nicer */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.leaflet-popup-content {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  min-width: 180px;
+}
+
+.popup-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1a365d;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.popup-row {
+  display: flex;
+  gap: 4px;
+  margin: 2px 0;
+}
+
+.popup-label {
+  color: #718096;
+  min-width: 70px;
+  font-size: 0.8rem;
+}
+
+.popup-value {
+  color: #2d3748;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.popup-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.badge-hospital    { background: #fed7d7; color: #c53030; }
+.badge-centro      { background: #feebc8; color: #9c4221; }
+.badge-puesto      { background: #c6f6d5; color: #276749; }
