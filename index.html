@@ -10,13 +10,14 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header id="topbar">
+  <header id="top-bar">
     <h1>🇵🇪 Mapa de Establecimientos de Salud — Perú</h1>
     <span class="subtitle">Datos: SUSALUD RENIPRESS · Datos Abiertos</span>
   </header>
   <div id="app">
+    <button id="open-sidebar-btn" type="button" aria-controls="sidebar" aria-expanded="false">☰ Filtros</button>
     <aside id="sidebar">
-      <button id="sidebar-toggle" aria-label="Toggle sidebar">☰ Filtros</button>
+      <button id="sidebar-toggle" type="button" aria-label="Cerrar filtros">✕ Cerrar filtros</button>
       <div id="sidebar-content">
         <div class="filter-group">
           <label for="dept-filter">📍 Departamento</label>
@@ -52,6 +53,7 @@
           <div class="legend-item"><span class="dot centro"></span> Centro de Salud</div>
           <div class="legend-item"><span class="dot puesto"></span> Puesto de Salud</div>
         </div>
+        <p class="sample-notice" role="note"><strong>Datos ilustrativos:</strong> 152 registros de muestra. No representan todos los establecimientos del Perú ni permiten medir cobertura, cercanía o calidad de atención.</p>
         <a href="https://www.datosabiertos.gob.pe/dataset/registro-nacional-de-entidades-prestadoras-de-servicios-de-salud-renipress"
            target="_blank" rel="noopener noreferrer" class="data-link">
           📂 Ver fuente de datos oficiales
@@ -62,7 +64,8 @@
         </div>
       </div>
     </aside>
-    <div id="map"></div>
+    <div id="map" role="region" aria-label="Mapa de establecimientos de salud de muestra"></div>
+    <p id="map-error" role="alert" aria-live="polite"></p>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>

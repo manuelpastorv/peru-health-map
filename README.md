@@ -1,8 +1,33 @@
 # 🇵🇪 Peru Health Access Map
 
-An interactive web map showing the distribution of healthcare facilities across Peru, built with open government data from SUSALUD RENIPRESS. **No installation, no server, no cost.**
+A free, static demo of healthcare-facility mapping with a **152-record illustrative sample** using SUSALUD RENIPRESS-style fields. It is not an official or complete national access dataset.
 
 🌐 **Live Demo:** https://manuelpastorv.github.io/peru-health-map
+
+---
+
+## ✅ Current implementation status (October 24, 2026)
+
+This repository now has a JavaScript map loader in `app.js`, province/department popups,
+facility-type filters, clustering, and local smoke tests. **The included 152
+facility records are an illustrative, curated sample, not a complete or verified
+RENIPRESS national dataset.** Do **not** infer service coverage, population
+access, capacity, or nearest facility from these example records.
+
+**Local development (HTTP required):**
+
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
+node --test tests/smoke.mjs   # Node 20+, no npm packages
+```
+
+Using `file://` will usually block the JSON `fetch()` due to browser
+security restrictions. Production data ingestion, lineage checks and
+nationwide coverage calculations are **not implemented** in this change.
+The official [SUSALUD RENIPRESS monthly data](https://www.datosabiertos.gob.pe/dataset/registro-nacional-de-entidades-prestadoras-de-servicios-de-salud-renipress)
+should be downloaded, validated, and attributed before using this site for
+real-world decisions.
 
 ---
 
@@ -28,12 +53,7 @@ By studying this project you'll understand:
 
 ## 🚀 How to Run Locally
 
-No installation needed!
-
-1. Clone or download this repository
-2. Open `index.html` in any web browser
-
-That's it. No npm, no server, no build step.
+No npm or build step is needed. Clone the repository and serve it over local HTTP with `python3 -m http.server 8000`, then visit `http://localhost:8000`. Direct `file://` access may block the JSON loader.
 
 ---
 
