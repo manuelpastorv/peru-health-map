@@ -6,6 +6,31 @@ An interactive web map showing the distribution of healthcare facilities across 
 
 ---
 
+## ✅ Current implementation status (October 24, 2026)
+
+This repository now has a JavaScript map loader in `app.js`, province/department popups,
+facility-type filters, clustering, and local smoke tests. **The included 152
+facility records are an illustrative, curated sample, not a complete or verified
+RENIPRESS national dataset.** Do **not** infer service coverage, population
+access, capacity, or nearest facility from these example records.
+
+**Local development (HTTP required):**
+
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
+node --test tests/smoke.mjs   # Node 20+, no npm packages
+```
+
+Using `file://` will usually block the JSON `fetch()` due to browser
+security restrictions. Production data ingestion, lineage checks and
+nationwide coverage calculations are **not implemented** in this change.
+The official [SUSALUD RENIPRESS monthly data](https://www.datosabiertos.gob.pe/dataset/registro-nacional-de-entidades-prestadoras-de-servicios-de-salud-renipress)
+should be downloaded, validated, and attributed before using this site for
+real-world decisions.
+
+---
+
 ## 🎯 What This Project Does
 
 This map visualizes 150+ healthcare facilities (Hospitals, Health Centers, and Health Posts) across all 25 regions of Peru. Users can filter by department and facility type to explore healthcare access gaps — especially visible between urban areas like Lima and remote regions like Huancavelica, Madre de Dios, or Loreto.
