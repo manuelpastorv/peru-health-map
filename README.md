@@ -1,6 +1,6 @@
 # 🇵🇪 Peru Health Access Map
 
-An interactive web map showing the distribution of healthcare facilities across Peru, built with open government data from SUSALUD RENIPRESS. **No installation, no server, no cost.**
+A free, static demo of healthcare-facility mapping with a **152-record illustrative sample** using SUSALUD RENIPRESS-style fields. It is not an official or complete national access dataset.
 
 🌐 **Live Demo:** https://manuelpastorv.github.io/peru-health-map
 
@@ -53,12 +53,7 @@ By studying this project you'll understand:
 
 ## 🚀 How to Run Locally
 
-No installation needed!
-
-1. Clone or download this repository
-2. Open `index.html` in any web browser
-
-That's it. No npm, no server, no build step.
+No npm or build step is needed. Clone the repository and serve it over local HTTP with `python3 -m http.server 8000`, then visit `http://localhost:8000`. Direct `file://` access may block the JSON loader.
 
 ---
 
