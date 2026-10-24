@@ -134,3 +134,11 @@ peru-health-map/
 ---
 
 Built with ❤️ for Peru and the open data community 🌎
+
+---
+
+## New open-source policy tool: ServiceFlow (CF-02)
+
+[**Compare Agent Runtime v1.3 and the Product Shipping Profile**](tools/serviceflow/index.html) · [Version A](tools/serviceflow/a/index.html) · [Version B](tools/serviceflow/b/index.html).
+
+A free, client-side case-processing event-log analyzer for service bottlenecks, repeated work, overlaps, incomplete records, scenario analysis and downloadable stocktake/CSV reports. The demo is synthetic and not current government data. Both variants passed the same 26/26 Chromium browser checks and the same 22/22 deterministic regression checks; the implementation was not an independent blinded agent trial. [Read experiment and limitations](tools/serviceflow/EXPERIMENT.md).
