@@ -1,0 +1,27 @@
+name: Budget Lab — reproducible checks
+on:
+  push:
+    branches: [experiment/budget-decision-lab-v13-v15-20261027]
+    paths: ['tools/budget-lab/**', '.github/workflows/budget-lab-ci.yml']
+  pull_request:
+    branches: [main]
+    paths: ['tools/budget-lab/**', '.github/workflows/budget-lab-ci.yml']
+  workflow_dispatch:
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test test.mjs
+        working-directory: tools/budget-lab
+      - run: node --check app.mjs && node --check engine.mjs
+        working-directory: tools/budget-lab
+      - name: Block unsourced government assertions
+        run: |
+          ! grep -R -Ei 'datos oficiales cargados|dato oficial en tiempo real' tools/budget-lab/*.html
